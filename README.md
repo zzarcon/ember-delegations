@@ -23,3 +23,8 @@ Plugin for delegate ember properties in a very descriptive and easy way. For exa
 ```
 
 In both cases the result is the same; from the dashboard context you can access to the three delegate properties but the second is much more elegant and declarative :D
+
+## TODO
+
+- [ ] Implement delegations with `Ember.Binding`
+- [ ] Add tests
