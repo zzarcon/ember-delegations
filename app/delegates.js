@@ -12,5 +12,5 @@ Ember.Object.reopen({
         return target.get(property);
       }).property(targetName + '.' + property));
     }, this);
-  }.on('init')
+  }.observes('delegates').on('init')
 });
