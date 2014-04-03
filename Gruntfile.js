@@ -29,7 +29,7 @@ module.exports = function(grunt) {
 				dest: 'debug/lib.js'
 			},
 			app: {
-				src: ['app/*.js', 'debug/templates.js'],
+				src: ['app/*.js'],
 				dest: 'debug/app.js'
 			},
 			test: {
@@ -43,26 +43,6 @@ module.exports = function(grunt) {
 			testApp: {
 				src: 'debug/app.js',
 				dest: 'qunit/app.js'
-			}
-		},
-		ember_handlebars: {
-			compile: {
-				options: {
-					processName: function(fileName) {
-						var arr = fileName.split("."),
-							path = arr[arr.length - 2].split("/"),
-							name = path[path.length - 1],
-							isComponents = path.indexOf('components') > -1;
-						if (isComponents) {
-							return 'components/' + name;
-						} else {
-							return name;
-						}
-					}
-				},
-				files: {
-					"debug/templates.js": ["app/templates/*.hbs"]
-				}
 			}
 		},
 		uglify: {
@@ -83,8 +63,8 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			scripts: {
-				files: ['app/library/*.js', 'app/*.js', 'app/templates/**/*.hbs', 'app/tests/*.js'],
-				tasks: ['ember_handlebars', 'concat'],
+				files: ['app/library/*.js', 'app/*.js', 'app/tests/*.js'],
+				tasks: ['concat'],
 				options: {
 					debounceDelay: 100
 				}
@@ -123,13 +103,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-ember-handlebars');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-qunit');
-	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-qunit');
 
-	grunt.registerTask('default', ['ember_handlebars', 'concat', 'connect', 'watch']);
+	grunt.registerTask('default', ['concat', 'connect', 'watch']);
 	grunt.registerTask('release', ['jshint', 'uglify']);
 };
