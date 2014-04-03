@@ -28,3 +28,4 @@ In both cases the result is the same; from the dashboard context you can access 
 
 - [ ] Implement delegations with `Ember.Binding`
 - [ ] Add tests
+- [ ] Use Ember Cli
