@@ -1,4 +1,4 @@
-Ember Property Delegation
+# Ember Property Delegation
 =================
 
 Plugin for delegate ember properties in a very descriptive and easy way. For example, you have a `dashboard controller` and you want to access a list of properties of your `application controller`, usually you declare each property in your controller and assign the value via `Ember.computed.alias` :
