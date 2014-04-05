@@ -1,4 +1,5 @@
 before_script:
-  - sudo npm install -g grunt
+  - grunt
 
-script: grunt test --verbose --force
+script:
+  - grunt test --verbose --force
