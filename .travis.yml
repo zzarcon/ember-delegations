@@ -1,4 +1,11 @@
-before_script:
-  - sudo npm install -g grunt
+node_js:
+- "0.10"
 
-script: grunt test --verbose --force
+install:
+- "npm install"
+
+before_script:
+  - grunt
+
+script:
+  - grunt test --verbose --force
