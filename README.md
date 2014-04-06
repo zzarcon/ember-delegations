@@ -7,7 +7,6 @@ Plugin for delegate ember properties in a very descriptive and easy way. For exa
 ```javascript
   App.DashboardController = Ember.ObjectController.extend({
     needs: ['application'],
-
     name: Ember.computed.alias('controllers.application.name'),
     version: Ember.computed.alias('controllers.application.version'),
     currentPath: Ember.computed.alias('controllers.application.currentPath')
@@ -18,14 +17,37 @@ Plugin for delegate ember properties in a very descriptive and easy way. For exa
 ```javascript
   App.DashboardController = Ember.ObjectController.extend({
     needs: ['application'],
-    delegates: ['controllers.application', 'name version currentPath']
+    delegates: {properties: 'name version currentPath', to: 'controllers.application'}
   });
 ```
 
 In both cases the result is the same; from the dashboard context you can access to the three delegate properties but the second is much more elegant and declarative :D
 
+**Multiple delegation**
+```javascript
+var animal = Ember.Object.create({
+  type: 'animal'
+});
+var alien = Ember.Object.create({
+  eyes: {
+    number: 4,
+    color: 'green'
+  }
+});
+
+var dog = Em.Object.create({
+  animal: animal,
+  alien: alien,
+  delegates: [
+    {properties: 'type', to: 'animal'},
+    {properties: 'eyes', to: 'alien'}
+  ]
+});
+```
+## CONTRIBUTING
+### Runing tests
+`grunt connect:test:keepalive
 ## TODO
 
 - [ ] Implement delegations with `Ember.Binding`
-- [ ] Add tests
 - [ ] Use Ember Cli
