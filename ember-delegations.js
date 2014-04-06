@@ -1,8 +1,43 @@
 (function() {
   "use strict";
+
   Ember.Object.reopen({
+    onInit: function() {
+      this.setDelegatedProperties();
+    }.on('init'),
+
+    onDelegatesChange: function() {
+      this.removeOldDelegations();
+      this.setDelegatedProperties();
+    }.observes('delegates'),
+
+    removeOldDelegations: function() {
+      var oldProps = this.get('oldDelegatedProperties');
+      if (!oldProps) return;
+
+      var self = this;
+      var removeProps = function(props) {
+        var arr = props.properties.split(' ');
+
+        arr.forEach(function(propertyName) {
+          self.set(propertyName, undefined);
+        });
+      };
+
+      if (oldProps) {
+        if (Ember.isArray(oldProps)) {
+          oldProps.forEach(removeProps);
+        } else {
+          removeProps(oldProps);
+        }
+      }
+
+      this.set('oldDelegatedProperties', null);
+    },
+
     setDelegatedProperties: function() {
       var delegates = this.get('delegates');
+      if (!delegates) return;
 
       var self = this;
       var setDelegate = function(delegate) {
@@ -23,6 +58,8 @@
           setDelegate(delegates);
         }
       }
-    }.observes('delegates').on('init')
+
+      this.set('oldDelegatedProperties', delegates);
+    }
   });
 })();
