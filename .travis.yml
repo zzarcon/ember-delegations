@@ -1,4 +1,6 @@
-before_script:
-  - sudo npm install -g grunt
-
-script: grunt test --verbose --force
+node_js:
+  - "0.10"
+before_install:
+  - "export PHANTOMJS_BIN=`which phantomjs`"
+script:
+  - grunt test
