@@ -37,7 +37,6 @@ module("Delegated properties", {
 });
 
 test("Access to delegated properties", function() {
-  debugger
   var properties = parent.getProperties('name', 'age', 'studies');
 
   ok(properties.name === 'John');
@@ -46,7 +45,6 @@ test("Access to delegated properties", function() {
 });
 
 test("Work with a single delegated property", function() {
-  debugger
   ok(!dog.get('type'));
 
   dog.set('animal', animal);
