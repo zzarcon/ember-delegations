@@ -1,6 +1,6 @@
 (function() {
   "use strict";
-  var isArray = Ember.isArray;
+  var isArray = Array.isArray;
 
   Ember.Object.reopen({
     onInit: function() {
