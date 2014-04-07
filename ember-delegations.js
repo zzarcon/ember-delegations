@@ -1,5 +1,6 @@
 (function() {
   "use strict";
+  var isArray = Ember.isArray;
 
   Ember.Object.reopen({
     onInit: function() {
@@ -25,7 +26,7 @@
       };
 
       if (oldProps) {
-        if (Ember.isArray(oldProps)) {
+        if (isArray(oldProps)) {
           oldProps.forEach(removeProps);
         } else {
           removeProps(oldProps);
@@ -36,7 +37,7 @@
     },
 
     setDelegatedProperties: function() {
-      if (!this || !this.get('delegations')) return;
+      if (!this.isValidDelegation()) return;
 
       var delegations = this.get('delegations');
       var self = this;
@@ -52,7 +53,7 @@
       };
 
       if (delegations) {
-        if (Ember.isArray(delegations)) {
+        if (isArray(delegations)) {
           delegations.forEach(setDelegate);
         } else {
           setDelegate(delegations);
@@ -60,6 +61,15 @@
       }
 
       this.set('oldDelegatedProperties', delegations);
+    },
+
+    isValidDelegation: function() {
+      if (this && this.get('delegations')) {
+        var delegations = this.get('delegations');
+
+        if (isArray(delegations)) delegations = delegations.get('firstObject');
+        return delegations.properties && delegations.to;
+      }
     }
   });
 })();
