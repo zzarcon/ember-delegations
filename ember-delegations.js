@@ -14,7 +14,7 @@
 
     removeOldDelegations: function() {
       var oldProps = this.get('oldDelegatedProperties');
-      if (!oldProps) return;
+      if (!this.isValidDelegation(oldProps)) return;
 
       var self = this;
       var removeProps = function(props) {
@@ -37,9 +37,9 @@
     },
 
     setDelegatedProperties: function() {
-      if (!this.isValidDelegation()) return;
-
       var delegations = this.get('delegations');
+      if (!this.isValidDelegation(delegations)) return;
+
       var self = this;
       var setDelegate = function(delegate) {
         var properties = delegate.properties.split(' ');
@@ -63,10 +63,8 @@
       this.set('oldDelegatedProperties', delegations);
     },
 
-    isValidDelegation: function() {
-      if (this && this.get('delegations')) {
-        var delegations = this.get('delegations');
-
+    isValidDelegation: function(delegations) {
+      if (this && delegations) {
         if (isArray(delegations)) delegations = delegations.get('firstObject');
         return delegations.properties && delegations.to;
       }
