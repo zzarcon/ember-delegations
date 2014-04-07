@@ -46,8 +46,7 @@ var dog = Em.Object.create({
 ```
 ## CONTRIBUTING
 ### Runing tests
-`grunt connect:test:keepalive
+`grunt connect:test:keepalive`
 ## TODO
 
-- [ ] Implement delegations with `Ember.Binding`
-- [ ] Use Ember Cli
+- Implement delegations with `Ember.Binding`

@@ -19,7 +19,7 @@
       });
 
       parent = Em.Object.create({
-        delegates: [
+        delegations: [
           {properties: 'name age studies', to: 'son'},
           {properties: 'surname', to: 'grandpa'},
         ],
@@ -31,7 +31,7 @@
       });
 
       dog = Em.Object.create({
-        delegates: {properties: 'type', to: 'animal'}
+        delegations: {properties: 'type', to: 'animal'}
       });
     }
   });
@@ -71,7 +71,7 @@
 
     parent.setProperties({
       grandMa: grandMa,
-      delegates: {
+      delegations: {
         properties: 'age', to: 'grandMa'
       }
     });

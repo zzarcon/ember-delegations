@@ -9,7 +9,7 @@
     onDelegatesChange: function() {
       this.removeOldDelegations();
       this.setDelegatedProperties();
-    }.observes('delegates'),
+    }.observes('delegations'),
 
     removeOldDelegations: function() {
       var oldProps = this.get('oldDelegatedProperties');
@@ -36,9 +36,9 @@
     },
 
     setDelegatedProperties: function() {
-      var delegates = this.get('delegates');
-      if (!delegates) return;
+      if (!this || !this.get('delegations')) return;
 
+      var delegations = this.get('delegations');
       var self = this;
       var setDelegate = function(delegate) {
         var properties = delegate.properties.split(' ');
@@ -51,15 +51,15 @@
         }, self);
       };
 
-      if (delegates) {
-        if (Ember.isArray(delegates)) {
-          delegates.forEach(setDelegate);
+      if (delegations) {
+        if (Ember.isArray(delegations)) {
+          delegations.forEach(setDelegate);
         } else {
-          setDelegate(delegates);
+          setDelegate(delegations);
         }
       }
 
-      this.set('oldDelegatedProperties', delegates);
+      this.set('oldDelegatedProperties', delegations);
     }
   });
 })();
