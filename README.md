@@ -1,7 +1,9 @@
 # Ember Property Delegation [![Build Status](https://travis-ci.org/zzarcon/ember-delegations.svg?branch=master)](https://travis-ci.org/zzarcon/ember-delegations)
 =================
 
-Plugin for delegate ember properties in a very descriptive and easy way. For example, you have a `dashboard controller` and you want to access a list of properties of your `application controller`, usually you declare each property in your controller and assign the value via `Ember.computed.alias` :
+#### Plugin for delegate ember properties in a very descriptive and easy way, based on [Ruby delegate module](http://apidock.com/rails/Module/delegate)
+
+For example, you have a `dashboard controller` and you want to access a list of properties of your `application controller`, usually you declare each property in your controller and assign the value via `Ember.computed.alias` :
 
 **After**
 ```javascript
@@ -26,7 +28,8 @@ In both cases the result is the same; from the dashboard context you can access 
 **Multiple delegation**
 ```javascript
 var animal = Ember.Object.create({
-  type: 'animal'
+  type: 'animal',
+  name: 'Brian'
 });
 var alien = Ember.Object.create({
   eyes: {
@@ -39,7 +42,7 @@ var dog = Em.Object.create({
   animal: animal,
   alien: alien,
   delegates: [
-    {properties: 'type', to: 'animal'},
+    {properties: 'type name', to: 'animal'},
     {properties: 'eyes', to: 'alien'}
   ]
 });
